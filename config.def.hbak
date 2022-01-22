@@ -1,8 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 1;   /* border pixel of windows */
+static const unsigned int borderpx       = 2;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
+static const unsigned int gappih         = 5;  /* horiz inner gap between windows */
+static const unsigned int gappiv         = 6;  /* vert inner gap between windows */
+static const unsigned int gappoh         = 5;  /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 10;  /* vert outer gap between windows and screen edge */
+static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 static const char autostartblocksh[]     = "autostart_blocking.sh";
 static const char autostartsh[]          = "autostart.sh";
 static const char dwmdir[]               = "dwm";
@@ -21,35 +26,69 @@ static const char dmenufont[]            = "monospace:size=10";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
+/*#005577 is blue*/
+
 static char normfgcolor[]                = "#bbbbbb";
 static char normbgcolor[]                = "#222222";
 static char normbordercolor[]            = "#444444";
 static char normfloatcolor[]             = "#db8fd9";
 
+
 static char selfgcolor[]                 = "#eeeeee";
-static char selbgcolor[]                 = "#005577";
+static char selbgcolor[]                 = "#812B81";
 static char selbordercolor[]             = "#005577";
 static char selfloatcolor[]              = "#005577";
+
+/*
+static char selfgcolor[]                 = "#eeeeee";
+static char selbgcolor[]                 = "#ff901c";
+static char selbordercolor[]             = "#ff901c";
+static char selfloatcolor[]              = "#ff901c";
+*/
 
 static char titlenormfgcolor[]           = "#bbbbbb";
 static char titlenormbgcolor[]           = "#222222";
 static char titlenormbordercolor[]       = "#444444";
 static char titlenormfloatcolor[]        = "#db8fd9";
 
+/*
 static char titleselfgcolor[]            = "#eeeeee";
 static char titleselbgcolor[]            = "#005577";
 static char titleselbordercolor[]        = "#005577";
 static char titleselfloatcolor[]         = "#005577";
+*/
+
+/*static char titleselfgcolor[]            = "#eeeeee";
+static char titleselbgcolor[]            = "#bf6e1a";
+static char titleselbordercolor[]        = "#bf6e1a";
+static char titleselfloatcolor[]         = "#bf6e1a";*/
+
+static char titleselfgcolor[]            = "#eeeeee";
+static char titleselbgcolor[]            = "#812B81";
+static char titleselbordercolor[]        = "#812B81";
+static char titleselfloatcolor[]         = "#812B81";
 
 static char tagsnormfgcolor[]            = "#bbbbbb";
 static char tagsnormbgcolor[]            = "#222222";
 static char tagsnormbordercolor[]        = "#444444";
 static char tagsnormfloatcolor[]         = "#db8fd9";
 
+/*
 static char tagsselfgcolor[]             = "#eeeeee";
 static char tagsselbgcolor[]             = "#005577";
 static char tagsselbordercolor[]         = "#005577";
 static char tagsselfloatcolor[]          = "#005577";
+*/
+
+/*static char tagsselfgcolor[]             = "#eeeeee";
+static char tagsselbgcolor[]             = "#bf6e1a";
+static char tagsselbordercolor[]         = "#bf6e1a";
+static char tagsselfloatcolor[]          = "#bf6e1a";*/
+
+static char tagsselfgcolor[]             = "#eeeeee";
+static char tagsselbgcolor[]             = "#812B81";
+static char tagsselbordercolor[]         = "#812B81";
+static char tagsselfloatcolor[]          = "#812B81";
 
 static char hidnormfgcolor[]             = "#005577";
 static char hidselfgcolor[]              = "#227799";
@@ -113,9 +152,12 @@ static Sp scratchpads[] = {
  * them. This works seamlessly with alternative tags and alttagsdecoration patches.
  */
 static char *tagicons[][NUMTAGS] = {
-	[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
-	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },
-	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },
+	/*[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },*/
+	[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5" },
+	/*[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },*/
+	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E" },
+	/*[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },*/
+	[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>" },
 };
 
 
@@ -221,11 +263,49 @@ static const char *dmenucmd[] = {
 };
 static const char *termcmd[]  = { "alacritty", NULL };
 
+/*volume control through playerctl plus adding xf86 sym key functionality*/
+#include <X11/XF86keysym.h>
+
+static const char *upvol[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
+static const char *downvol[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
+static const char *mutevol[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
+
+/*brightness vari*/
+static const char *brightup[] = { "brightnessctl", "s", "+5%", NULL };
+static const char *brightdown[] = { "brightnessctl", "s", "5-%", NULL };
+
+/*main screenshot shits*/
+/*static const char maimcopy[] = { "maim", "-s", "|", "xclip", "-selection", "clipboard", "-t", "image/png", NULL };*/
+static const char *maimcopy[] = { "screencopy", NULL };
+static const char *maimsave[] = { "screensave", NULL };
+
+/*toggle picom*/
+static const char *killcomp[] = { "compositorp", NULL };
 
 
 static Key keys[] = {
 	/* modifier                     key            function                argument */
-	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
+    /*volume control*/
+
+    { 0,           XF86XK_AudioRaiseVolume,        spawn,                  {.v = upvol   } },
+    { 0,           XF86XK_AudioLowerVolume,        spawn,                  {.v = downvol } },
+    { 0,           XF86XK_AudioMute,               spawn,                  {.v = mutevol } },
+
+    /*brightness*/
+
+    { 0,           XF86XK_MonBrightnessUp,         spawn,                  {.v = brightup } },
+    { 0,           XF86XK_MonBrightnessDown,       spawn,                  {.v = brightdown } },
+
+    /*screenshot*/
+
+    { 0,                            XK_Print,      spawn,                  {.v = maimcopy } },
+    { MODKEY,                       XK_Print,      spawn,                  {.v = maimsave } },
+
+    /*kill compositor*/
+
+    { MODKEY|ShiftMask,             XK_v,          spawn,                  {.v = killcomp } },
+
+	{ MODKEY,                       XK_o,          spawn,                  {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return,     spawn,                  {.v = termcmd } },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
 	{ MODKEY,                       XK_j,          focusstack,             {.i = +1 } },
@@ -234,7 +314,26 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,          incnmaster,             {.i = -1 } },
 	{ MODKEY,                       XK_h,          setmfact,               {.f = -0.05} },
 	{ MODKEY,                       XK_l,          setmfact,               {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_h,          setcfact,               {.f = +0.25} },
+	{ MODKEY|ShiftMask,             XK_l,          setcfact,               {.f = -0.25} },
+	{ MODKEY|ShiftMask,             XK_o,          setcfact,               {0} },
 	{ MODKEY,                       XK_Return,     zoom,                   {0} },
+	{ MODKEY|Mod1Mask,              XK_u,          incrgaps,               {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,          incrgaps,               {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_i,          incrigaps,              {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_i,          incrigaps,              {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_o,          incrogaps,              {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_o,          incrogaps,              {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_6,          incrihgaps,             {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_6,          incrihgaps,             {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_7,          incrivgaps,             {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_7,          incrivgaps,             {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_8,          incrohgaps,             {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_8,          incrohgaps,             {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_9,          incrovgaps,             {.i = +1 } },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,          incrovgaps,             {.i = -1 } },
+	{ MODKEY|Mod1Mask,              XK_0,          togglegaps,             {0} },
+	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,          defaultgaps,            {0} },
 	{ MODKEY,                       XK_Tab,        view,                   {0} },
 	{ MODKEY|ShiftMask,             XK_c,          killclient,             {0} },
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
