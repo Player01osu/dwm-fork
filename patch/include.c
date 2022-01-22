@@ -12,6 +12,7 @@
 #include "cfacts.c"
 #include "cyclelayouts.c"
 #include "fullscreen.c"
+#include "movestack.c"
 #include "pertag.c"
 #include "restartsig.c"
 #include "scratchpad.c"

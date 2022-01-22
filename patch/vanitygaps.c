@@ -1,5 +1,4 @@
 /* Settings */
-static int enablegaps = 1;
 
 static void
 setgaps(int oh, int ov, int ih, int iv)
@@ -14,6 +13,8 @@ setgaps(int oh, int ov, int ih, int iv)
 	selmon->gappih = ih;
 	selmon->gappiv = iv;
 
+	selmon->pertag->gaps[selmon->pertag->curtag] =
+		((oh & 0xFF) << 0) | ((ov & 0xFF) << 8) | ((ih & 0xFF) << 16) | ((iv & 0xFF) << 24);
 
 	arrange(selmon);
 }
@@ -22,7 +23,7 @@ setgaps(int oh, int ov, int ih, int iv)
 static void
 togglegaps(const Arg *arg)
 {
-	enablegaps = !enablegaps;
+	selmon->pertag->enablegaps[selmon->pertag->curtag] = !selmon->pertag->enablegaps[selmon->pertag->curtag];
 	arrange(NULL);
 }
 
@@ -113,7 +114,7 @@ static void
 getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc)
 {
 	unsigned int n, oe, ie;
-	oe = ie = enablegaps;
+	oe = ie = selmon->pertag->enablegaps[selmon->pertag->curtag];
 	Client *c;
 
 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);

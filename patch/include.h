@@ -12,6 +12,7 @@
 #include "cfacts.h"
 #include "cyclelayouts.h"
 #include "fullscreen.h"
+#include "movestack.h"
 #include "pertag.h"
 #include "restartsig.h"
 #include "scratchpad.h"
