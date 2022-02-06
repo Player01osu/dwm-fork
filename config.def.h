@@ -1,13 +1,13 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 2;   /* border pixel of windows */
+static const unsigned int borderpx       = 3;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
-static const unsigned int gappih         = 5;  /* horiz inner gap between windows */
-static const unsigned int gappiv         = 6;  /* vert inner gap between windows */
-static const unsigned int gappoh         = 7;  /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 7;  /* vert outer gap between windows and screen edge */
-static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
+static const unsigned int gappih         = 10;  /* horiz inner gap between windows */
+static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
+static const unsigned int gappoh         = 8;  /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 20;  /* vert outer gap between windows and screen edge */
+static const int smartgaps_fact          = 3;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 static const char autostartblocksh[]     = "autostart_blocking.sh";
 static const char autostartsh[]          = "autostart.sh";
 static const char dwmdir[]               = "dwm";
@@ -15,14 +15,18 @@ static const char localshare[]           = ".local/share";
 static const int showbar                 = 1;   /* 0 means no bar */
 static const int topbar                  = 1;   /* 0 means bottom bar */
 /* Status is to be shown on: -1 (all monitors), 0 (a specific monitor by index), 'A' (active monitor) */
-static const int statusmon               = 'A';
+static const int statusmon               = -1;
 
 /* Indicators: see patch/bar_indicators.h for options */
-static int tagindicatortype              = INDICATOR_TOP_LEFT_SQUARE;
-static int tiledindicatortype            = INDICATOR_NONE;
-static int floatindicatortype            = INDICATOR_TOP_LEFT_SQUARE;
-static const char *fonts[]               = { "monospace:size=10" };
-static const char dmenufont[]            = "monospace:size=10";
+// static int tagindicatortype              = INDICATOR_TOP_LEFT_SQUARE;
+// static int floatindicatortype            = INDICATOR_TOP_LEFT_SQUARE;
+static int tagindicatortype              = INDICATOR_TOP_BAR_SLIM;
+static int tiledindicatortype            = INDICATOR_TOP_BAR_SLIM;
+//static int tagindicatortype              = INDICATOR_NONE;
+//static int tiledindicatortype            = INDICATOR_NONE;
+static int floatindicatortype            = INDICATOR_NONE;
+static const char *fonts[]               = { "spacemono:size=12" };
+static const char dmenufont[]            = "spacemono:size=12";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
@@ -35,9 +39,11 @@ static char normfloatcolor[]             = "#db8fd9";
 
 
 static char selfgcolor[]                 = "#eeeeee";
+//static char selfgcolor[]                 = "#812B81";
 static char selbgcolor[]                 = "#812B81";
-static char selbordercolor[]             = "#005577";
-static char selfloatcolor[]              = "#005577";
+//static char selbgcolor[]                 = "#222222";
+static char selbordercolor[]             = "#6E236E";
+static char selfloatcolor[]              = "#6E236E";
 
 /*
 static char selfgcolor[]                 = "#eeeeee";
@@ -64,7 +70,7 @@ static char titleselbordercolor[]        = "#bf6e1a";
 static char titleselfloatcolor[]         = "#bf6e1a";*/
 
 static char titleselfgcolor[]            = "#eeeeee";
-static char titleselbgcolor[]            = "#812B81";
+static char titleselbgcolor[]            = "#222222";
 static char titleselbordercolor[]        = "#812B81";
 static char titleselfloatcolor[]         = "#812B81";
 
@@ -85,8 +91,10 @@ static char tagsselbgcolor[]             = "#bf6e1a";
 static char tagsselbordercolor[]         = "#bf6e1a";
 static char tagsselfloatcolor[]          = "#bf6e1a";*/
 
-static char tagsselfgcolor[]             = "#eeeeee";
-static char tagsselbgcolor[]             = "#812B81";
+// static char tagsselfgcolor[]             = "#eeeeee";
+static char tagsselfgcolor[]             = "#a62ca6";
+// static char tagsselbgcolor[]             = "#812B81";
+static char tagsselbgcolor[]             = "#222222";
 static char tagsselbordercolor[]         = "#812B81";
 static char tagsselfloatcolor[]          = "#812B81";
 
@@ -147,13 +155,14 @@ static Sp scratchpads[] = {
  *
  * For the second example each tag would be represented as a bullet point. Both cases work the
  * same from a technical standpoint - the icon index is derived from the tag index and the monitor
+ * 
  * index. If the icon index is is greater than the number of tag icons then it will wrap around
  * until it an icon matches. Similarly if there are two tag icons then it would alternate between
  * them. This works seamlessly with alternative tags and alttagsdecoration patches.
  */
 static char *tagicons[][5] = {
 	/*[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },*/
-	[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5" },
+	[DEFAULT_TAGS]        = { "●", "●", "●", "●", "●" },
 	/*[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },*/
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E" },
 	/*[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },*/
