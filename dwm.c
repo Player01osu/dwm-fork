@@ -2094,8 +2094,8 @@ void updatebarpos(Monitor *m) {
   m->ww = m->mw;
   m->wh = m->mh;
   Bar *bar;
-  int y_pad = 0;
-  int x_pad = 0;
+  int y_pad = vertpad;
+  int x_pad = sidepad;
 
   for (bar = m->bar; bar; bar = bar->next) {
     bar->bx = m->wx + x_pad;
