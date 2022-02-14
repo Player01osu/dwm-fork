@@ -14,8 +14,8 @@ static const char dwmdir[]               = "dwm";
 static const char localshare[]           = ".local/share";
 static const int showbar                 = 1;   /* 0 means no bar */
 static const int topbar                  = 1;   /* 0 means bottom bar */
-static const int vertpad            = 7;       /* vertical padding of bar */
-static const int sidepad            = 23;       /* horizontal padding of bar */
+static const int vertpad            = 0;       /* vertical padding of bar */
+static const int sidepad            = 0;       /* horizontal padding of bar */
 /* Status is to be shown on: -1 (all monitors), 0 (a specific monitor by index), 'A' (active monitor) */
 static const int statusmon               = -1;
 
@@ -27,8 +27,8 @@ static int tagindicatortype              = INDICATOR_TOP_BAR_SLIM;
 //static int tagindicatortype              = INDICATOR_NONE;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_NONE;
-static const char *fonts[]               = { "spacemono:size=12" };
-static const char dmenufont[]            = "spacemono:size=12";
+static const char *fonts[]               = { "spacemono:size=11", "fontawesome:size14" };
+static const char dmenufont[]            = "spacemono:size=11";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
@@ -55,6 +55,7 @@ static char selfloatcolor[]              = "#ff901c";
 */
 
 static char titlenormfgcolor[]           = "#bbbbbb";
+//static char titlenormfgcolor[]           = "#222222";
 static char titlenormbgcolor[]           = "#222222";
 static char titlenormbordercolor[]       = "#444444";
 static char titlenormfloatcolor[]        = "#db8fd9";
@@ -71,7 +72,8 @@ static char titleselbgcolor[]            = "#bf6e1a";
 static char titleselbordercolor[]        = "#bf6e1a";
 static char titleselfloatcolor[]         = "#bf6e1a";*/
 
-static char titleselfgcolor[]            = "#eeeeee";
+//static char titleselfgcolor[]            = "#eeeeee";
+static char titleselfgcolor[]            = "#222222";
 static char titleselbgcolor[]            = "#222222";
 static char titleselbordercolor[]        = "#812B81";
 static char titleselfloatcolor[]         = "#812B81";
@@ -162,9 +164,9 @@ static Sp scratchpads[] = {
  * until it an icon matches. Similarly if there are two tag icons then it would alternate between
  * them. This works seamlessly with alternative tags and alttagsdecoration patches.
  */
-static char *tagicons[][5] = {
+static char *tagicons[][6] = {
 	/*[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },*/
-	[DEFAULT_TAGS]        = { "●", "●", "●", "●", "●" },
+	[DEFAULT_TAGS]        = { "●", "●", "●", "●", "●", "●" },
 	/*[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },*/
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E" },
 	/*[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },*/
@@ -201,6 +203,8 @@ static const Rule rules[] = {
 	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
 	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
 	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
+    RULE(.title = "Preferences", .isfloating = 1)
+    RULE(.instance = "todo", .isfloating = 1)
 	RULE(.class = "Gimp", .tags = 1 << 4)
 	RULE(.class = "Firefox", .tags = 1 << 7)
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
@@ -373,7 +377,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_3,                                  2)
 	TAGKEYS(                        XK_4,                                  3)
 	TAGKEYS(                        XK_5,                                  4)
-	//TAGKEYS(                        XK_6,                                  5)
+	TAGKEYS(                        XK_6,                                  5)
 	//TAGKEYS(                        XK_7,                                  6)
 	//TAGKEYS(                        XK_8,                                  7)
 	//TAGKEYS(                        XK_9,                                  8)
