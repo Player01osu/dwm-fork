@@ -27,7 +27,7 @@ static int tagindicatortype              = INDICATOR_TOP_BAR_SLIM;
 //static int tagindicatortype              = INDICATOR_NONE;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_NONE;
-static const char *fonts[]               = { "spacemono:size=11", "Font Awesome 6:size=10:style=Solid:antialias=true:autohint=true" };
+static const char *fonts[]               = { "spacemono:size=11", "Font Awesome 6 Free:size=11:style=Solid:antialias=true:autohint=true" };
 static const char dmenufont[]            = "spacemono:size=11";
 
 static char c000000[]                    = "#000000"; // placeholder value
