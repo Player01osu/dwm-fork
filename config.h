@@ -27,14 +27,16 @@ static int tagindicatortype              = INDICATOR_TOP_BAR_SLIM;
 //static int tagindicatortype              = INDICATOR_NONE;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_NONE;
-static const char *fonts[]               = { "spacemono:size=11", "Font Awesome 6 Free:size=11:style=Solid:antialias=true:autohint=true" };
-static const char dmenufont[]            = "spacemono:size=11";
+//static const char *fonts[]               = { "spacemono:size=11", "Font Awesome 6 Free:size=13:style=Solid:antialias=true:autohint=true" };
+static const char *fonts[]               = { "Liberation Mono:size=13:antialias=true:autohint=true", "Font Awesome 6 Free:size=12:style=Solid:antialias=true:autohint=true" };
+//static const char dmenufont[]            = "spacemono:size=11";
+static const char dmenufont[]            = "Liberation Mono:size=13:antialias=true:autohint=true";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
 /*#005577 is blue*/
 
-static char normfgcolor[]                = "#bbbbbb";
+static char normfgcolor[]                = "#af4faf";
 static char normbgcolor[]                = "#222222";
 static char normbordercolor[]            = "#444444";
 static char normfloatcolor[]             = "#db8fd9";
@@ -168,7 +170,8 @@ static Sp scratchpads[] = {
  */
 static char *tagicons[][6] = {
 	/*[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },*/
-	[DEFAULT_TAGS]        = { "●", "●", "●", "●", "●", "●" },
+	//[DEFAULT_TAGS]        = { "●", "●", "●", "●", "●", "●" },
+	[DEFAULT_TAGS]        = { "", "", "", "", "", "" },
 	/*[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },*/
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E" },
 	/*[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },*/
@@ -244,9 +247,11 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
+//	{ "[]=",      tile },    /* first entry is default */
+	{ "",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	//{ "[M]",      monocle },
+	{ "",      monocle },
 	{ "(@)",      spiral },
 	{ "[\\]",     dwindle },
 	{ "HHH",      grid },
