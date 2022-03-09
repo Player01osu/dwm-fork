@@ -3,10 +3,10 @@
 /* appearance */
 static const unsigned int borderpx       = 4;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
-static const unsigned int gappih         = 10;  /* horiz inner gap between windows */
-static const unsigned int gappiv         = 10;  /* vert inner gap between windows */
+static const unsigned int gappih         = 11;  /* horiz inner gap between windows */
+static const unsigned int gappiv         = 11;  /* vert inner gap between windows */
 static const unsigned int gappoh         = 7;  /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 17;  /* vert outer gap between windows and screen edge */
+static const unsigned int gappov         = 19;  /* vert outer gap between windows and screen edge */
 static const int smartgaps_fact          = 3;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 static const char autostartblocksh[]     = "autostart_blocking.sh";
 static const char autostartsh[]          = "autostart.sh";
@@ -28,16 +28,16 @@ static int tagindicatortype              = INDICATOR_TOP_BAR_SLIM;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_NONE;
 //static const char *fonts[]               = { "Source Sans Pro:size=13:antialias=true:autohint=true", "Font Awesome 6 Free:size=11:style=Solid:antialias=true:autohint=true" };
-static const char *fonts[]               = { "JetBrains Mono:size=12:style=Bold:antialias=true:autohint=true", "Font Awesome 6 Free:size=13:style=Solid:antialias=true:autohint=true" };
+static const char *fonts[]               = { "JetBrains Mono:size=10:style=Bold:antialias=true:autohint=true", "Font Awesome 6 Free:size=11:style=Solid:antialias=true:autohint=true" };
 //static const char dmenufont[]            = "spacemono:size=11";
-static const char dmenufont[]            = "JetBrains Mono:size=12:style=Bold:antialias=true:autohint=true";
+static const char dmenufont[]            = "JetBrains Mono:size=10:style=Bold:antialias=true:autohint=true";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
 /*#005577 is blue*/
 
-static char normfgcolor[]                = "#af4faf";
-static char normbgcolor[]                = "#222222";
+static char normfgcolor[]                = "#af4faf"; //
+static char normbgcolor[]                = "#323232"; //#222222
 static char normbordercolor[]            = "#444444";
 static char normfloatcolor[]             = "#db8fd9";
 
@@ -58,7 +58,7 @@ static char selfloatcolor[]              = "#ff901c";
 
 static char titlenormfgcolor[]           = "#bbbbbb";
 //static char titlenormfgcolor[]           = "#222222";
-static char titlenormbgcolor[]           = "#222222";
+static char titlenormbgcolor[]           = "#323232"; //#222222
 static char titlenormbordercolor[]       = "#444444";
 static char titlenormfloatcolor[]        = "#db8fd9";
 
@@ -75,13 +75,13 @@ static char titleselbordercolor[]        = "#bf6e1a";
 static char titleselfloatcolor[]         = "#bf6e1a";*/
 
 //static char titleselfgcolor[]            = "#eeeeee";
-static char titleselfgcolor[]            = "#222222";
-static char titleselbgcolor[]            = "#222222";
+static char titleselfgcolor[]            = "#323232"; //#222222
+static char titleselbgcolor[]            = "#323232"; //#222222
 static char titleselbordercolor[]        = "#812B81";
 static char titleselfloatcolor[]         = "#812B81";
 
 static char tagsnormfgcolor[]            = "#bbbbbb";
-static char tagsnormbgcolor[]            = "#222222";
+static char tagsnormbgcolor[]            = "#323232"; //#222222
 static char tagsnormbordercolor[]        = "#444444";
 static char tagsnormfloatcolor[]         = "#db8fd9";
 
@@ -100,17 +100,17 @@ static char tagsselfloatcolor[]          = "#bf6e1a";*/
 // static char tagsselfgcolor[]             = "#eeeeee";
 static char tagsselfgcolor[]             = "#a62ca6";
 // static char tagsselbgcolor[]             = "#812B81";
-static char tagsselbgcolor[]             = "#222222";
+static char tagsselbgcolor[]             = "#323232"; //#222222
 static char tagsselbordercolor[]         = "#812B81";
 static char tagsselfloatcolor[]          = "#812B81";
 
 static char hidnormfgcolor[]             = "#005577";
 static char hidselfgcolor[]              = "#227799";
-static char hidnormbgcolor[]             = "#222222";
-static char hidselbgcolor[]              = "#222222";
+static char hidnormbgcolor[]             = "#323232"; //#222222
+static char hidselbgcolor[]              = "#323232"; //#222222
 
 static char urgfgcolor[]                 = "#bbbbbb";
-static char urgbgcolor[]                 = "#222222";
+static char urgbgcolor[]                 = "#323232"; //#222222
 static char urgbordercolor[]             = "#ff0000";
 static char urgfloatcolor[]              = "#db8fd9";
 
@@ -165,7 +165,7 @@ static Sp scratchpads[] = {
  *
  * For the second example each tag would be represented as a bullet point. Both cases work the
  * same from a technical standpoint - the icon index is derived from the tag index and the monitor
- * 
+ *
  * index. If the icon index is is greater than the number of tag icons then it will wrap around
  * until it an icon matches. Similarly if there are two tag icons then it would alternate between
  * them. This works seamlessly with alternative tags and alttagsdecoration patches.
