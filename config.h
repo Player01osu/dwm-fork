@@ -1,13 +1,14 @@
+
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx       = 4;   /* border pixel of windows */
+static const unsigned int borderpx       = 5;   /* border pixel of windows */
 static const unsigned int snap           = 32;  /* snap pixel */
 static const unsigned int gappih         = 11;  /* horiz inner gap between windows */
 static const unsigned int gappiv         = 11;  /* vert inner gap between windows */
-static const unsigned int gappoh         = 7;  /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov         = 19;  /* vert outer gap between windows and screen edge */
-static const int smartgaps_fact          = 3;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
+static const unsigned int gappoh         = 12;  /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov         = 12;  /* vert outer gap between windows and screen edge */
+static const int smartgaps_fact          = 1;   /* gap factor when there is only one client; 0 = no gaps, 3 = 3x outer gaps */
 static const char autostartblocksh[]     = "autostart_blocking.sh";
 static const char autostartsh[]          = "autostart.sh";
 static const char dwmdir[]               = "dwm";
@@ -28,7 +29,7 @@ static int tagindicatortype              = INDICATOR_TOP_BAR_SLIM;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_NONE;
 //static const char *fonts[]               = { "Source Sans Pro:size=13:antialias=true:autohint=true", "Font Awesome 6 Free:size=11:style=Solid:antialias=true:autohint=true" };
-static const char *fonts[]               = { "JetBrains Mono:size=10:style=Bold:antialias=true:autohint=true", "Font Awesome 6 Free:size=11:style=Solid:antialias=true:autohint=true" };
+static const char *fonts[]               = { "JetBrains Mono:size=10:style=Bold:antialias=true:autohint=true", "Font Awesome 6 Free:size=10:style=Solid:antialias=true:autohint=true" };
 //static const char dmenufont[]            = "spacemono:size=11";
 static const char dmenufont[]            = "JetBrains Mono:size=10:style=Bold:antialias=true:autohint=true";
 
@@ -172,9 +173,11 @@ static Sp scratchpads[] = {
  */
 static char *tagicons[][6] = {
 	/*[DEFAULT_TAGS]        = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },*/
-	//[DEFAULT_TAGS]        = { "●", "●", "●", "●", "●", "●" },
+	//[DEFAULT_TAGS]        = { "", "", "", "", "", "" },
+	[DEFAULT_TAGS]        = { "●", "●", "●", "●", "●", "●" },
 	//[DEFAULT_TAGS]        = { "", "", "", "", "", "" },
-	[DEFAULT_TAGS]        = { "", "", "", "", "", "" },
+	//[DEFAULT_TAGS]        = { "", "", "", "", "", "" },
+  //[DEFAULT_TAGS] = {"•", "•", "•", "•", "•", "•"},
 	/*[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E", "F", "G", "H", "I" },*/
 	[ALTERNATIVE_TAGS]    = { "A", "B", "C", "D", "E" },
 	/*[ALT_TAGS_DECORATION] = { "<1>", "<2>", "<3>", "<4>", "<5>", "<6>", "<7>", "<8>", "<9>" },*/
@@ -207,17 +210,17 @@ static const Rule rules[] = {
 	 *	WM_WINDOW_ROLE(STRING) = role
 	 *	_NET_WM_WINDOW_TYPE(ATOM) = wintype
 	 */
-	RULE(.wintype = WTYPE "DIALOG", .isfloating = 1)
-	RULE(.wintype = WTYPE "UTILITY", .isfloating = 1)
-	RULE(.wintype = WTYPE "TOOLBAR", .isfloating = 1)
-	RULE(.wintype = WTYPE "SPLASH", .isfloating = 1)
-    RULE(.title = "Preferences", .isfloating = 1)
-    RULE(.instance = "todo", .isfloating = 1)
-	RULE(.class = "Gimp", .tags = 1 << 4)
-	RULE(.class = "Firefox", .tags = 1 << 7)
+	RULE(.wintype  = WTYPE "DIALOG", .isfloating = 1)
+	RULE(.wintype  = WTYPE "UTILITY", .isfloating = 1)
+	RULE(.wintype  = WTYPE "TOOLBAR", .isfloating = 1)
+	RULE(.wintype  = WTYPE "SPLASH", .isfloating = 1)
+  RULE(.title    = "Preferences", .isfloating = 1)
+  RULE(.instance = "todo", .isfloating = 1)
+	RULE(.class    = "Gimp", .tags = 1 << 4)
+	RULE(.class    = "Firefox", .tags = 1 << 7)
 	RULE(.instance = "spterm", .tags = SPTAG(0), .isfloating = 1)
-    RULE(.instance = "sptodo", .tags = SPTAG(1), .isfloating = 1)
-    RULE(.instance = "spcode", .tags = SPTAG(2), .isfloating = 1)
+  RULE(.instance = "sptodo", .tags = SPTAG(1), .isfloating = 1)
+  RULE(.instance = "spcode", .tags = SPTAG(2), .isfloating = 1)
 };
 
 
@@ -309,6 +312,8 @@ static const char *maimsave[] = { "screensave", NULL };
 /*toggle picom*/
 static const char *killcomp[] = { "compositorp", NULL };
 
+static const char *compo[] = {"pkill", "picom", NULL};
+static const char *compi[] = {"picom", "--experimental-backends", NULL};
 
 static Key keys[] = {
 	/* modifier                     key            function                argument */
@@ -368,8 +373,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,          quit,                   {0} },
 	{ MODKEY|ControlMask|ShiftMask, XK_q,          quit,                   {1} },
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
+  { MODKEY,                       XK_t,          spawn,                  {.v = compi}},
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
+  { MODKEY,                       XK_m,          spawn,                  {.v = compo}},
 	{ MODKEY,                       XK_space,      setlayout,              {0} },
 
     // scratchpad 1
