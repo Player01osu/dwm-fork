@@ -29,9 +29,9 @@ static int tagindicatortype              = INDICATOR_TOP_BAR_SLIM;
 static int tiledindicatortype            = INDICATOR_NONE;
 static int floatindicatortype            = INDICATOR_NONE;
 //static const char *fonts[]               = { "Source Sans Pro:size=13:antialias=true:autohint=true", "Font Awesome 6 Free:size=11:style=Solid:antialias=true:autohint=true" };
-static const char *fonts[]               = { "JetBrains Mono:size=10:style=Bold:antialias=true:autohint=true", "Font Awesome 6 Free:size=10:style=Solid:antialias=true:autohint=true" };
+static const char *fonts[]               = { "JetBrains Mono:size=9:style=Bold:antialias=true:autohint=true", "Font Awesome 6 Free:size=10:style=Solid:antialias=true:autohint=true" };
 //static const char dmenufont[]            = "spacemono:size=11";
-static const char dmenufont[]            = "JetBrains Mono:size=10:style=Bold:antialias=true:autohint=true";
+static const char dmenufont[]            = "JetBrains Mono:size=9:style=Bold:antialias=true:autohint=true";
 
 static char c000000[]                    = "#000000"; // placeholder value
 
@@ -57,7 +57,7 @@ static char selbordercolor[]             = "#ff901c";
 static char selfloatcolor[]              = "#ff901c";
 */
 
-static char titlenormfgcolor[]           = "#bbbbbb";
+static char titlenormfgcolor[]           = "#323232"; //#bbbbbb
 //static char titlenormfgcolor[]           = "#222222";
 static char titlenormbgcolor[]           = "#323232"; //#222222
 static char titlenormbordercolor[]       = "#444444";
@@ -81,7 +81,7 @@ static char titleselbgcolor[]            = "#323232"; //#222222
 static char titleselbordercolor[]        = "#812B81";
 static char titleselfloatcolor[]         = "#812B81";
 
-static char tagsnormfgcolor[]            = "#bbbbbb";
+static char tagsnormfgcolor[]            = "#bbbbbb"; //#323232
 static char tagsnormbgcolor[]            = "#323232"; //#222222
 static char tagsnormbordercolor[]        = "#444444";
 static char tagsnormfloatcolor[]         = "#db8fd9";
